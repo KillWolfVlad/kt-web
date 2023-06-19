@@ -1,10 +1,39 @@
 name: deploy
 
 on:
-  - workflow_dispatch
+  workflow_dispatch:
+  push:
+    branches: ["master"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    uses: Byndyusoft/node-reusable-workflows/.github/workflows/deploy.yaml@master
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: Byndyusoft/node-reusable-workflows/.github/actions/install@master
+        with:
+          node-version: lts/*
+
+      - run: yarn run build
+
+      - uses: actions/configure-pages@v3
+
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist
+
+      - uses: actions/deploy-pages@v2
+        id: deployment
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}

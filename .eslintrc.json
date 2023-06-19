@@ -1,4 +1,51 @@
 {
   "root": true,
-  "extends": ["@byndyusoft/eslint-config/header-apache-2.0", "@byndyusoft/eslint-config/backend"]
+  "extends": [
+    "@byndyusoft/eslint-config/header-apache-2.0",
+    "@byndyusoft/eslint-config/frontend",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig*.json"]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "plugins": ["simple-import-sort"],
+      "rules": {
+        // eslint-plugin-simple-import-sort
+        "simple-import-sort/imports": [
+          "warn", // style
+          {
+            "groups": [
+              // Side effect imports
+              ["^\\u0000"],
+
+              // React
+              ["^(react|react-dom)(/|$)"],
+
+              // Packages.
+              // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+              ["^@?\\w"],
+
+              // Absolute imports and other imports such as Vue-style `@/foo`.
+              // Anything that does not start with a dot.
+              ["^[^.]"],
+
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+            ]
+          }
+        ],
+        "simple-import-sort/exports": "error",
+        // eslint-plugin-prettier
+        "prettier/prettier": "off" // run prettier externally
+      }
+    }
+  ]
 }

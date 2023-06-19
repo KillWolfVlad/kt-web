@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Byndyusoft
+ * Copyright 2023 KillWolfVlad
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,22 @@
  * limitations under the License.
  */
 
-export * from "./helloWorldService";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+import { App } from "./app/app";
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement,
+);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
