@@ -20,7 +20,7 @@ export interface IMovie {
   readonly name: string;
   readonly description: string;
   readonly rating: string;
-  readonly posterURL: string;
+  readonly posterUrl: string;
 
   readonly torrents: ReadonlyArray<{
     readonly name: string;

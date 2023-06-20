@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useState } from "react";
 
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
@@ -22,6 +22,8 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 import { IMovie } from "../../interfaces";
+
+import noPoster from "./no-poster.png";
 
 export interface IMovieItemProps {
   readonly movie: IMovie;
@@ -32,9 +34,30 @@ export const MovieItem: React.FC<IMovieItemProps> = ({
   movie,
   onInfoButtonClicked,
 }) => {
+  const maxRetries = 10;
+
+  const [posterUrl, setPosterUrl] = useState(movie.posterUrl);
+  const [retriesCount, setRetriesCount] = useState(0);
+
   return (
     <ImageListItem>
-      <img src={movie.posterURL} loading="lazy" alt="" />
+      <img
+        src={posterUrl}
+        alt=""
+        loading="lazy"
+        onError={() => {
+          if (retriesCount + 1 <= maxRetries) {
+            setRetriesCount((value) => value + 1);
+            setPosterUrl(noPoster);
+
+            setTimeout(() => {
+              setPosterUrl(movie.posterUrl);
+            }, 1_000);
+          } else {
+            setPosterUrl(noPoster);
+          }
+        }}
+      />
       <ImageListItemBar
         title={movie.name}
         subtitle={movie.rating}

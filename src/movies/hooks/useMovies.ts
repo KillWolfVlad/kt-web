@@ -66,7 +66,7 @@ export const useMovies = (): IUseMoviesResult => {
         name: rawMovie.nameRU ?? "",
         description: rawMovie.description ?? "",
         rating: rawMovie.rating ?? "",
-        posterURL: rawMovie.posterURL ?? "",
+        posterUrl: rawMovie.posterURL ?? "",
         torrents:
           rawMovie.torrents?.map((rawTorrent) => ({
             name: [
