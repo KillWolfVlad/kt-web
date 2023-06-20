@@ -34,7 +34,7 @@ export const MovieItem: React.FC<IMovieItemProps> = ({
 }) => {
   return (
     <ImageListItem>
-      <img src={movie.posterURL} alt="" />
+      <img src={movie.posterURL} loading="lazy" alt="" />
       <ImageListItemBar
         title={movie.name}
         subtitle={movie.rating}
