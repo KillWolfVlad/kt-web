@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useMemo } from "react";
 
 import DnsIcon from "@mui/icons-material/Dns";
 import HomeIcon from "@mui/icons-material/Home";
@@ -40,6 +40,18 @@ export const LayoutDrawer: React.FC<ILayoutDrawerProps> = ({
   onClose,
 }) => {
   const { promptMoviesDataUrl } = useSettingsContext();
+
+  const gitCommitSha = useMemo(() => {
+    const viteGitCommitSha = import.meta.env.VITE_GIT_COMMIT_SHA as
+      | string
+      | undefined;
+
+    if (!viteGitCommitSha) {
+      return "<dev>";
+    }
+
+    return viteGitCommitSha.slice(0, 6);
+  }, []);
 
   return (
     <SwipeableDrawer
@@ -77,6 +89,9 @@ export const LayoutDrawer: React.FC<ILayoutDrawerProps> = ({
           </ListItemIcon>
           <ListItemText primary="Source Code" />
         </ListItemButton>
+        <ListItem>
+          <ListItemText>Git Commit: {gitCommitSha}</ListItemText>
+        </ListItem>
       </List>
     </SwipeableDrawer>
   );
