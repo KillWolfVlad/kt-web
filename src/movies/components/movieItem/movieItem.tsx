@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
+import { useCountryFlag } from "../../hooks";
 import { IMovie } from "../../interfaces";
 
 import noPoster from "./no-poster.png";
@@ -38,6 +39,16 @@ export const MovieItem: React.FC<IMovieItemProps> = ({
 
   const [posterUrl, setPosterUrl] = useState(movie.posterUrl);
   const [retriesCount, setRetriesCount] = useState(0);
+
+  const countryFlag = useCountryFlag(movie.country);
+
+  const title = useMemo(() => {
+    if (countryFlag) {
+      return `${countryFlag} ${movie.name}`;
+    }
+
+    return movie.name;
+  }, [movie, countryFlag]);
 
   return (
     <ImageListItem>
@@ -59,8 +70,8 @@ export const MovieItem: React.FC<IMovieItemProps> = ({
         }}
       />
       <ImageListItemBar
-        title={movie.name}
-        subtitle={movie.rating}
+        title={title}
+        subtitle={`⭐ ${movie.rating}`}
         actionIcon={
           <IconButton
             sx={{ color: "rgba(255, 255, 255, 0.54)" }}

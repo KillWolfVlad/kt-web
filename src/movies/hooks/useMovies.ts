@@ -44,10 +44,13 @@ export const useMovies = (): IUseMoviesResult => {
       const { data } = await axios.get<{
         readonly movies: ReadonlyArray<{
           readonly filmID: number;
+
           readonly nameRU?: string;
           readonly description?: string;
           readonly rating?: string;
           readonly posterURL?: string;
+
+          readonly country?: string;
 
           readonly torrents?: ReadonlyArray<{
             readonly audio?: string;
@@ -63,10 +66,14 @@ export const useMovies = (): IUseMoviesResult => {
 
       return data.movies.map<IMovie>((rawMovie) => ({
         id: String(rawMovie.filmID),
+
         name: rawMovie.nameRU ?? "",
         description: rawMovie.description ?? "",
         rating: rawMovie.rating ?? "",
         posterUrl: rawMovie.posterURL ?? "",
+
+        country: rawMovie.country ?? "",
+
         torrents:
           rawMovie.torrents?.map((rawTorrent) => ({
             name: [

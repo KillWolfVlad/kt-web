@@ -14,6 +14,27 @@
  * limitations under the License.
  */
 
-export * from "./useCountryFlag";
-export * from "./useMovies";
-export * from "./useMoviesColumns";
+import { useMemo } from "react";
+
+const data: Record<string, string> = {
+  Россия: "🇷🇺",
+  Казахстан: "🇰🇿",
+  Беларусь: "🇧🇾",
+  США: "🇺🇸",
+  Япония: "🇯🇵",
+  "Корея Южная": "🇰🇷",
+  Китай: "🇨🇳",
+  Индия: "🇮🇳",
+};
+
+export const useCountryFlag = (country: string): string | null => {
+  return useMemo(() => {
+    for (const [key, value] of Object.entries(data)) {
+      if (country.includes(key)) {
+        return value;
+      }
+    }
+
+    return null;
+  }, [country]);
+};
