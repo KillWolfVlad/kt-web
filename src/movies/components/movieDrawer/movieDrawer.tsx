@@ -18,6 +18,7 @@ import React from "react";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -67,6 +68,19 @@ export const MovieDrawer: React.FC<IMovieDrawerProps> = ({
         <ListItem>
           <Typography paragraph>{movie.description}</Typography>
         </ListItem>
+        <ListItemButton
+          onClick={() => {
+            window.open(
+              `https://www.kinopoisk.ru/film/${encodeURIComponent(movie.id)}`,
+              "_blank",
+            );
+          }}
+        >
+          <ListItemIcon>
+            <OpenInNewIcon />
+          </ListItemIcon>
+          <ListItemText primary="Kinopoisk" />
+        </ListItemButton>
       </List>
       <Divider />
       <List>
