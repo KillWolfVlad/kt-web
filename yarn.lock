@@ -2479,33 +2479,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.29.14":
-  version: 4.29.14
-  resolution: "@tanstack/query-core@npm:4.29.14"
-  checksum: 802621ee239f8e9fa191d472c360c174762a84d16582599779e7121c2b6bded246a44c3d42ca5ada76d323192c83911508d2accb418e5dccb79ffa84cc0d1bd9
+"@tanstack/query-core@npm:4.29.15":
+  version: 4.29.15
+  resolution: "@tanstack/query-core@npm:4.29.15"
+  checksum: 10/3a6309590203b0d03da5b3c1c607d6f969a6948549fb70546d4fe9ec9ce00fc6b6a1e7239ec177e2339ec867b7927f5dd7e46fc74136beb2bb1c444acb56d4aa
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:4.29.14":
-  version: 4.29.14
-  resolution: "@tanstack/react-query-devtools@npm:4.29.14"
+"@tanstack/react-query-devtools@npm:4.29.15":
+  version: 4.29.15
+  resolution: "@tanstack/react-query-devtools@npm:4.29.15"
   dependencies:
     "@tanstack/match-sorter-utils": "npm:^8.7.0"
     superjson: "npm:^1.10.0"
     use-sync-external-store: "npm:^1.2.0"
   peerDependencies:
-    "@tanstack/react-query": 4.29.14
+    "@tanstack/react-query": 4.29.15
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: f7343cd24b939578894035af1c06a958797feb5950309ff56fc371cf94387d6c273b6b66334aff86b93e1fd8418eb6f61abb8a041a6f306eb8b563fd4b74e342
+  checksum: 10/33dab2dcb5b1808883e128b88447a12915827aeb1a265759e5317e2fb0d2cbda7f1233505c0c697a47d08b277a26e5fdb0580ec19e9fe5b119f524e0711e9caa
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.29.14":
-  version: 4.29.14
-  resolution: "@tanstack/react-query@npm:4.29.14"
+"@tanstack/react-query@npm:4.29.15":
+  version: 4.29.15
+  resolution: "@tanstack/react-query@npm:4.29.15"
   dependencies:
-    "@tanstack/query-core": "npm:4.29.14"
+    "@tanstack/query-core": "npm:4.29.15"
     use-sync-external-store: "npm:^1.2.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2516,7 +2516,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: f95d6d4523b7ea54a895b13c4afc757f1cbcc49d359001b015bb2ba59d84042940feadec52b95f6d314147e3e18e20a6aa747e7952a933d76cd91a1139a142eb
+  checksum: 10/41d996ed4c0a8cd54de75e32da8c85a585dc94f6a0077e575c0147b7ba20fceebbae1f23073e07dd1fc69ba7cb140f794813087b5b71eecc71586ce69b9ee5c5
   languageName: node
   linkType: hard
 
@@ -6056,8 +6056,8 @@ __metadata:
     "@fontsource/roboto": "npm:5.0.3"
     "@mui/icons-material": "npm:5.11.16"
     "@mui/material": "npm:5.13.5"
-    "@tanstack/react-query": "npm:4.29.14"
-    "@tanstack/react-query-devtools": "npm:4.29.14"
+    "@tanstack/react-query": "npm:4.29.15"
+    "@tanstack/react-query-devtools": "npm:4.29.15"
     "@types/react": "npm:18.2.13"
     "@types/react-dom": "npm:18.2.6"
     "@vitejs/plugin-react-swc": "npm:3.3.2"
