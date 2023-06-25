@@ -1380,12 +1380,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:17.6.5":
-  version: 17.6.5
-  resolution: "@commitlint/cli@npm:17.6.5"
+"@commitlint/cli@npm:17.6.6":
+  version: 17.6.6
+  resolution: "@commitlint/cli@npm:17.6.6"
   dependencies:
     "@commitlint/format": "npm:^17.4.4"
-    "@commitlint/lint": "npm:^17.6.5"
+    "@commitlint/lint": "npm:^17.6.6"
     "@commitlint/load": "npm:^17.5.0"
     "@commitlint/read": "npm:^17.5.1"
     "@commitlint/types": "npm:^17.4.4"
@@ -1396,16 +1396,16 @@ __metadata:
     yargs: "npm:^17.0.0"
   bin:
     commitlint: cli.js
-  checksum: 9bc387ae28dea3fef4b67beb4a2527e6aaa2cf1597f48e3f374e2841e78689f32fd9110a0e95d6b6cb2c6b514d0c9dab7cb0df9d24718480802db32ea3d7a100
+  checksum: 10/a117c2aba7ac122c7c6df973147db58d92547e6da2a8ce916a3501ccb944f8393b04e32de97a8ad633883344599a73f89d64dd9fa793c06cb1baba22f9fcc0e5
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:17.6.5":
-  version: 17.6.5
-  resolution: "@commitlint/config-conventional@npm:17.6.5"
+"@commitlint/config-conventional@npm:17.6.6":
+  version: 17.6.6
+  resolution: "@commitlint/config-conventional@npm:17.6.6"
   dependencies:
     conventional-changelog-conventionalcommits: "npm:^5.0.0"
-  checksum: e1e74bd1d476b60f2c2de47be6a5bb3a41b210529bdc9c05b5d0968177f7a14275e730a57b78858f8e3e02a58ea56e835428b6aaf08edf3496b03978cba3e0bb
+  checksum: 10/0f649a2cbe684aa18555cb0027c21f58d74216dbe0a850be041af50f1db04e447b7d90995bee54c61059d735b398de61ac7ecbfd312d14480aac3a3f8c62dd66
   languageName: node
   linkType: hard
 
@@ -1450,25 +1450,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/is-ignored@npm:^17.6.5":
-  version: 17.6.5
-  resolution: "@commitlint/is-ignored@npm:17.6.5"
+"@commitlint/is-ignored@npm:^17.6.6":
+  version: 17.6.6
+  resolution: "@commitlint/is-ignored@npm:17.6.6"
   dependencies:
     "@commitlint/types": "npm:^17.4.4"
-    semver: "npm:7.5.0"
-  checksum: f0b88f925ddf3ca10d6df64489c16da2bfcbc219ca9b2ea49fb2d88dd0cc9328e6551250989c20a34e5627f99d10fc4ca058ee45715f8a75bfc06ba888652836
+    semver: "npm:7.5.2"
+  checksum: 10/ff5f8816765b3f2e9f16de32b1166dd099ab23793212bf4092203441fe3d9f282c80ed96cca5cd42b0ea96d899f8989bdaa6604a3f02bf4bd36b8c7c123968df
   languageName: node
   linkType: hard
 
-"@commitlint/lint@npm:^17.6.5":
-  version: 17.6.5
-  resolution: "@commitlint/lint@npm:17.6.5"
+"@commitlint/lint@npm:^17.6.6":
+  version: 17.6.6
+  resolution: "@commitlint/lint@npm:17.6.6"
   dependencies:
-    "@commitlint/is-ignored": "npm:^17.6.5"
+    "@commitlint/is-ignored": "npm:^17.6.6"
     "@commitlint/parse": "npm:^17.6.5"
     "@commitlint/rules": "npm:^17.6.5"
     "@commitlint/types": "npm:^17.4.4"
-  checksum: 16d7ae7f6954311de6201aa913fa1d0c423488b2c9420002bfca0e1effdaa28510df9e290e523f9015c6f9b8b72758edd0b201d63b6112923f67c5f01b64cf29
+  checksum: 10/e675a533efbed67fe21b268ee0690d89ca10b826cb8ce93fbe6c160123bc72c15665d921bccd3afcf22bc9dd81c104c879428ea326801a3d9c9b2a6c0073445d
   languageName: node
   linkType: hard
 
@@ -2494,33 +2494,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.29.15":
-  version: 4.29.15
-  resolution: "@tanstack/query-core@npm:4.29.15"
-  checksum: 10/3a6309590203b0d03da5b3c1c607d6f969a6948549fb70546d4fe9ec9ce00fc6b6a1e7239ec177e2339ec867b7927f5dd7e46fc74136beb2bb1c444acb56d4aa
+"@tanstack/query-core@npm:4.29.17":
+  version: 4.29.17
+  resolution: "@tanstack/query-core@npm:4.29.17"
+  checksum: 10/7aaec318176bbe153a4d9f4e245f2c3db797d1367eebeeacb332be2a8d14f5d1626f38df56928a219ab1ac04123623888d897eb972f1e6b053a3e423aa8985de
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:4.29.15":
-  version: 4.29.15
-  resolution: "@tanstack/react-query-devtools@npm:4.29.15"
+"@tanstack/react-query-devtools@npm:4.29.17":
+  version: 4.29.17
+  resolution: "@tanstack/react-query-devtools@npm:4.29.17"
   dependencies:
     "@tanstack/match-sorter-utils": "npm:^8.7.0"
     superjson: "npm:^1.10.0"
     use-sync-external-store: "npm:^1.2.0"
   peerDependencies:
-    "@tanstack/react-query": 4.29.15
+    "@tanstack/react-query": 4.29.17
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/33dab2dcb5b1808883e128b88447a12915827aeb1a265759e5317e2fb0d2cbda7f1233505c0c697a47d08b277a26e5fdb0580ec19e9fe5b119f524e0711e9caa
+  checksum: 10/b406f7806cd45ee8c47009b6255ba0ec3678c2838455286673995df325d26ad9c2f5b384d630d21e9f88c7198bd271323363f67004c4ebcd6dbece91807fedb2
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.29.15":
-  version: 4.29.15
-  resolution: "@tanstack/react-query@npm:4.29.15"
+"@tanstack/react-query@npm:4.29.17":
+  version: 4.29.17
+  resolution: "@tanstack/react-query@npm:4.29.17"
   dependencies:
-    "@tanstack/query-core": "npm:4.29.15"
+    "@tanstack/query-core": "npm:4.29.17"
+    client-only: "npm:0.0.1"
     use-sync-external-store: "npm:^1.2.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2531,7 +2532,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10/41d996ed4c0a8cd54de75e32da8c85a585dc94f6a0077e575c0147b7ba20fceebbae1f23073e07dd1fc69ba7cb140f794813087b5b71eecc71586ce69b9ee5c5
+  checksum: 10/a479435e655557cf7039bc05a477f8bfc094f559da3490c23e7c8cafb9d4e854f0d8f9030c43e3b6fc3e982c5495ca3145ef70af3fb8d27ada70a68fb83b0a71
   languageName: node
   linkType: hard
 
@@ -3509,6 +3510,13 @@ __metadata:
     slice-ansi: "npm:^5.0.0"
     string-width: "npm:^5.0.0"
   checksum: 4d91d570b19e3800d1b8e83ca08f03e6453cc0f6ea081deca0e3458d42bb5c148890b8b2bf2b5db9d59cfe214eaaa0df078563e5d8892537e295a2938ca27b06
+  languageName: node
+  linkType: hard
+
+"client-only@npm:0.0.1":
+  version: 0.0.1
+  resolution: "client-only@npm:0.0.1"
+  checksum: 10/0c16bf660dadb90610553c1d8946a7fdfb81d624adea073b8440b7d795d5b5b08beb3c950c6a2cf16279365a3265158a236876d92bce16423c485c322d7dfaf8
   languageName: node
   linkType: hard
 
@@ -6075,15 +6083,15 @@ __metadata:
   dependencies:
     "@byndyusoft/eslint-config": "npm:2.4.1"
     "@byndyusoft/tsconfig": "npm:2.0.0-rc.1"
-    "@commitlint/cli": "npm:17.6.5"
-    "@commitlint/config-conventional": "npm:17.6.5"
+    "@commitlint/cli": "npm:17.6.6"
+    "@commitlint/config-conventional": "npm:17.6.6"
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
     "@fontsource/roboto": "npm:5.0.3"
     "@mui/icons-material": "npm:5.11.16"
     "@mui/material": "npm:5.13.6"
-    "@tanstack/react-query": "npm:4.29.15"
-    "@tanstack/react-query-devtools": "npm:4.29.15"
+    "@tanstack/react-query": "npm:4.29.17"
+    "@tanstack/react-query-devtools": "npm:4.29.17"
     "@types/react": "npm:18.2.14"
     "@types/react-dom": "npm:18.2.6"
     "@vitejs/plugin-react-swc": "npm:3.3.2"
@@ -7786,14 +7794,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.5.0":
-  version: 7.5.0
-  resolution: "semver@npm:7.5.0"
+"semver@npm:7.5.2, semver@npm:^7.0.0, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
+  version: 7.5.2
+  resolution: "semver@npm:7.5.2"
   dependencies:
     lru-cache: "npm:^6.0.0"
   bin:
     semver: bin/semver.js
-  checksum: 4cc7856258319d36c441fb969fa2ee622fa3761ce1b04013ed5d05979adfcf3079f4fc4dff11f9b2588802620d579da2c209a4e26803d9adfbf44b78244b683b
+  checksum: 896fab94563f3e4187b57a883e2efab277488bf4bd823d7794410435c39a1191830ae366470baad3430f74a555534d06cfc85c3e1b82f2bdeb9dd34edc980189
   languageName: node
   linkType: hard
 
@@ -7803,17 +7811,6 @@ __metadata:
   bin:
     semver: ./bin/semver.js
   checksum: 18f3d42ec70a542e9efc498ecc3d0b9b088099115e8658b49d2bfc6470b46a6144b294374dac3f343fe1600039cbd80d5e830dd356053fd5abd4f1af5118a928
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.0.0, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
-  version: 7.5.2
-  resolution: "semver@npm:7.5.2"
-  dependencies:
-    lru-cache: "npm:^6.0.0"
-  bin:
-    semver: bin/semver.js
-  checksum: 896fab94563f3e4187b57a883e2efab277488bf4bd823d7794410435c39a1191830ae366470baad3430f74a555534d06cfc85c3e1b82f2bdeb9dd34edc980189
   languageName: node
   linkType: hard
 
