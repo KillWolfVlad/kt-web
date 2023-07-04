@@ -8,6 +8,10 @@ Unofficial KinoTrend Web Version
 
 > WARNING! This repository and site does not distribute unlicensed content! Site only show content from your data source.
 
+## CORS
+
+If you have troubles with CORS use any CORS proxy, e.g. [CodeTabs](https://codetabs.com/cors-proxy/cors-proxy.html).
+
 ## Requirements
 
 - Node.js v18 LTS or later
