@@ -33,15 +33,15 @@
     "@fontsource/roboto": "5.0.8",
     "@mui/icons-material": "5.14.3",
     "@mui/material": "5.14.5",
-    "@tanstack/react-query": "4.32.6",
-    "@tanstack/react-query-devtools": "4.32.6",
+    "@tanstack/react-query": "4.33.0",
+    "@tanstack/react-query-devtools": "4.33.0",
     "axios": "1.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "use-local-storage-state": "18.3.3"
   },
   "devDependencies": {
-    "@byndyusoft/eslint-config": "2.4.1",
+    "@byndyusoft/eslint-config": "2.5.0",
     "@byndyusoft/tsconfig": "2.0.0",
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
@@ -50,7 +50,7 @@
     "@vitejs/plugin-react-swc": "3.3.2",
     "eslint": "8.47.0",
     "husky": "8.0.3",
-    "lint-staged": "14.0.0",
+    "lint-staged": "14.0.1",
     "markdownlint-cli": "0.35.0",
     "prettier": "2.8.8",
     "prettier-plugin-packagejson": "2.4.5",
@@ -58,7 +58,7 @@
     "vite": "4.4.9",
     "vite-plugin-pwa": "0.16.4"
   },
-  "packageManager": "yarn@4.0.0-rc.48",
+  "packageManager": "yarn@4.0.0-rc.49",
   "engines": {
     "node": ">=18"
   }
