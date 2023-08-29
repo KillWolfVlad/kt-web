@@ -6215,7 +6215,7 @@ __metadata:
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     typescript: "npm:5.2.2"
-    use-local-storage-state: "npm:18.3.3"
+    use-local-storage-state: "npm:19.0.4"
     vite: "npm:4.4.9"
     vite-plugin-pwa: "npm:0.16.4"
   languageName: unknown
@@ -8845,13 +8845,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-local-storage-state@npm:18.3.3":
-  version: 18.3.3
-  resolution: "use-local-storage-state@npm:18.3.3"
+"use-local-storage-state@npm:19.0.4":
+  version: 19.0.4
+  resolution: "use-local-storage-state@npm:19.0.4"
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: d62ece98bd8b066c891d13f87954dfd532dea9594a4a0355a0b8e41ee0e81c334ab747e6e0c27bd4dbdd37a22e3a7cf004853a49a3b694461ab23d9cd1de7294
+  checksum: 008b1bc5ffba370c9109ce82c622123f2cad247c7f080b08dd824593f19032759235b84c906329809934a0902d2a6d02479d67d3dbb878b0b49347f1b7819a7c
   languageName: node
   linkType: hard
 
