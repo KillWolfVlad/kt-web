@@ -51,6 +51,7 @@ export const useMovies = (): IUseMoviesResult => {
           readonly posterURL?: string;
 
           readonly country?: string;
+          readonly genre?: string;
 
           readonly torrents?: ReadonlyArray<{
             readonly audio?: string;
@@ -73,6 +74,7 @@ export const useMovies = (): IUseMoviesResult => {
         posterUrl: rawMovie.posterURL ?? "",
 
         country: rawMovie.country ?? "",
+        genre: rawMovie.genre ?? "",
 
         torrents:
           rawMovie.torrents?.map((rawTorrent) => ({

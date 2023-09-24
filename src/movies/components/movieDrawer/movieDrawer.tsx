@@ -66,6 +66,9 @@ export const MovieDrawer: React.FC<IMovieDrawerProps> = ({
           <Typography noWrap>{movie.country}</Typography>
         </ListItem>
         <ListItem>
+          <Typography noWrap>{movie.genre}</Typography>
+        </ListItem>
+        <ListItem>
           <Typography paragraph>{movie.description}</Typography>
         </ListItem>
         <ListItemButton
