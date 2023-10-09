@@ -2684,12 +2684,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.11":
-  version: 18.2.11
-  resolution: "@types/react-dom@npm:18.2.11"
+"@types/react-dom@npm:18.2.12":
+  version: 18.2.12
+  resolution: "@types/react-dom@npm:18.2.12"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 3ba42df0dc1e8a26baed9668b9e2b5aea7c8e28289cf5baa656c1a07c6f83cd3c3360a374e00f96c01ce914950105d14d3ecd59be75cf215b8d3657b0b5d7785
+  checksum: 8de055588ca6840400947e2ae9c5ad663c225d73bc24aa352c6f56dcad124a408caf6f19045cb98b822069d07e81a93d3c4dfefab31bb65c1b7b36bd509e825c
   languageName: node
   linkType: hard
 
@@ -2713,14 +2713,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.25":
-  version: 18.2.25
-  resolution: "@types/react@npm:18.2.25"
+"@types/react@npm:18.2.27":
+  version: 18.2.27
+  resolution: "@types/react@npm:18.2.27"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 17559ab8e9a3347b466eb782e21fe45f841e0e39d3f656e4711693cb6d193f948a9913c9e96b64bc4700eb24b34c47f15adbddcc39c596b4b3b79c99619b83bf
+  checksum: e1f51a6f9c10e889924851c1fdb36e08fc418d5ee2ecc3598e4725fecff0e28183fc04dea4d9a37f96ba95d386e97b0c78554ea2b17ed91e4ad6808b68ce423b
   languageName: node
   linkType: hard
 
@@ -6230,8 +6230,8 @@ __metadata:
     "@mui/material": "npm:5.14.12"
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
-    "@types/react": "npm:18.2.25"
-    "@types/react-dom": "npm:18.2.11"
+    "@types/react": "npm:18.2.27"
+    "@types/react-dom": "npm:18.2.12"
     "@vitejs/plugin-react-swc": "npm:3.4.0"
     axios: "npm:1.5.1"
     eslint: "npm:8.51.0"
