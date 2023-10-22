@@ -48,7 +48,9 @@ export const useMoviesColumns = (): number => {
     if (matchesXs) {
       return 2;
     }
+
+    return 1;
   }, [matchesXs, matchesSm, matchesMd, matchesLg, matchesXl]);
 
-  return moviesColumns ?? 1;
+  return moviesColumns;
 };
