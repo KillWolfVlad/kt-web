@@ -130,3 +130,9 @@ select {
   gap: var(--space-sm);
   padding: var(--space-sm);
 }
+
+@media (max-width: 767px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}

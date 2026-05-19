@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Movie } from "../types";
+import { useScrollLock } from "../hooks/useScrollLock";
 import "./SettingsDialog.css";
 import "./MovieViewDialog.css";
 
@@ -12,6 +13,8 @@ interface Props {
 export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [callingIndex, setCallingIndex] = useState<number | null>(null);
+
+  useScrollLock(true);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -70,6 +73,9 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
     <>
       <div className="overlay" onClick={onClose}>
         <div className="dialog movie-view-dialog" onClick={(e) => e.stopPropagation()}>
+          <button className="close-button" type="button" onClick={onClose}>
+            ✕
+          </button>
           <h2>{movie.nameRU}</h2>
           <div className="movie-view-content">
             <p className="movie-view-field">

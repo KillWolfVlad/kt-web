@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Settings } from "../hooks/useSettings";
+import { useScrollLock } from "../hooks/useScrollLock";
 import "./SettingsDialog.css";
 
 interface Props {
@@ -15,6 +16,8 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
   const [webhookUrl, setWebhookUrl] = useState(initialSettings.webhookUrl);
 
   const canSave = dataSourceUrl.trim().length > 0;
+
+  useScrollLock(true);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -55,24 +58,31 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
           ✕
         </button>
         <h2>Настройки</h2>
-        <label>
-          Источник данных (data.json)
-          <input
-            type="text"
-            value={dataSourceUrl}
-            onChange={(e) => setDataSourceUrl(e.target.value)}
-            placeholder="https://example.com/data.json"
-          />
-        </label>
-        <label>
-          WebHook (опционально)
-          <input
-            type="text"
-            value={webhookUrl}
-            onChange={(e) => setWebhookUrl(e.target.value)}
-            placeholder="https://example.com/webhook"
-          />
-        </label>
+        <div className="dialog-scrollable">
+          <label>
+            Источник данных (data.json)
+            <input
+              type="text"
+              value={dataSourceUrl}
+              onChange={(e) => setDataSourceUrl(e.target.value)}
+              placeholder="https://example.com/data.json"
+            />
+          </label>
+          <label>
+            WebHook (опционально)
+            <input
+              type="text"
+              value={webhookUrl}
+              onChange={(e) => setWebhookUrl(e.target.value)}
+              placeholder="https://example.com/webhook"
+            />
+          </label>
+          <div className="dialog-footer">
+            <span>Git Commit: {import.meta.env.VITE_GIT_COMMIT_SHA?.slice(0, 6) || "<dev>"}</span>
+            <span>Лицензия: Apache License 2.0</span>
+            <span>Исходный код: <a href="https://github.com/KillWolfVlad/kt-web" target="_blank" rel="noopener noreferrer">https://github.com/KillWolfVlad/kt-web</a></span>
+          </div>
+        </div>
         <button
           className="save-button"
           type="submit"
@@ -80,11 +90,6 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
         >
           Сохранить
         </button>
-        <div className="dialog-footer">
-          <span>Git Commit: {import.meta.env.VITE_GIT_COMMIT_SHA?.slice(0, 6) || "<dev>"}</span>
-          <span>Лицензия: Apache License 2.0</span>
-          <span>Исходный код: <a href="https://github.com/KillWolfVlad/kt-web" target="_blank" rel="noopener noreferrer">https://github.com/KillWolfVlad/kt-web</a></span>
-        </div>
       </form>
     </div>
   );

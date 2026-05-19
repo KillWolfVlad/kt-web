@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Filters } from "../hooks/useFilters";
+import { useScrollLock } from "../hooks/useScrollLock";
 import "./SettingsDialog.css";
 import "./FiltersDialog.css";
 
@@ -17,6 +18,8 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
   const [ratingInput, setRatingInput] = useState(
     initialFilters.minRating?.toString() ?? "",
   );
+
+  useScrollLock(true);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -65,50 +68,52 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
           ✕
         </button>
         <h2>Фильтры</h2>
-        <label>
-          Название фильма
-          <div className="filter-input-row">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Введите название"
-            />
-            <button
-              className="clear-button"
-              type="button"
-              onClick={() => setName("")}
-              title="Очистить"
-            >
-              ✕
-            </button>
-          </div>
-        </label>
-        <label>
-          Рейтинг ({">="})
-          <div className="filter-input-row">
-            <input
-              type="number"
-              value={ratingInput}
-              onChange={(e) => handleRatingChange(e.target.value)}
-              placeholder="0"
-              min={0}
-              max={10}
-              step={0.1}
-            />
-            <button
-              className="clear-button"
-              type="button"
-              onClick={() => {
-                setRatingInput("");
-                setMinRating(null);
-              }}
-              title="Очистить"
-            >
-              ✕
-            </button>
-          </div>
-        </label>
+        <div className="dialog-scrollable">
+          <label>
+            Название фильма
+            <div className="filter-input-row">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Введите название"
+              />
+              <button
+                className="clear-button"
+                type="button"
+                onClick={() => setName("")}
+                title="Очистить"
+              >
+                ✕
+              </button>
+            </div>
+          </label>
+          <label>
+            Рейтинг ({">="})
+            <div className="filter-input-row">
+              <input
+                type="number"
+                value={ratingInput}
+                onChange={(e) => handleRatingChange(e.target.value)}
+                placeholder="0"
+                min={0}
+                max={10}
+                step={0.1}
+              />
+              <button
+                className="clear-button"
+                type="button"
+                onClick={() => {
+                  setRatingInput("");
+                  setMinRating(null);
+                }}
+                title="Очистить"
+              >
+                ✕
+              </button>
+            </div>
+          </label>
+        </div>
         <div className="dialog-actions">
           <button className="clear-all-button" type="button" onClick={handleClear}>
             Очистить

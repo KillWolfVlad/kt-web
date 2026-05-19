@@ -54,6 +54,7 @@ function App() {
       <Navbar
         onOpenFilters={() => setShowFilters(true)}
         onOpenSettings={() => setShowSettings(true)}
+        hasActiveFilters={filters.name !== "" || filters.minRating !== null}
       />
       {hasSource && loading && (
         <div className="spinner">🎬</div>

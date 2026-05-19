@@ -83,6 +83,12 @@
   opacity: 0.5;
 }
 
+.dialog-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
 .save-button {
   margin-top: auto;
   padding: var(--space-sm) var(--space-lg);
@@ -107,7 +113,6 @@
 }
 
 .dialog-footer {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
