@@ -4,6 +4,12 @@ status: done
 
 # 2026-05-18-7-vite-dev-server
 
-- Добавь в Vite dev server два служебных URL для тестирования WebHook
+- Добавь в Vite dev server три служебных URL для тестирования
   - /test/webhook/200 - который отдает успешный ответ 200
   - /test/webhook/404 - который отдает неуспешный ответ 404
+  - /test/data.json - который проксирует запрос до сервера,
+    указанного в переменной KT_DATA_URL в файле .env
+
+- Создай файл .env с переменной KT_DATA_URL и значением по умолчанию
+  http://localhost:3000/data.json
+- Создай файл .env.example как шаблон без реальных значений
