@@ -9,9 +9,19 @@ export function useScrollLock(locked: boolean) {
     if (!locked) return;
 
     const scrollbarWidth = getScrollbarWidth();
+    const scrollY = window.scrollY;
 
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+    const prevOverscrollBehavior = document.body.style.overscrollBehavior;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overscrollBehavior = "none";
 
     if (scrollbarWidth > 0) {
       const prevPaddingRight = document.body.style.paddingRight;
@@ -21,13 +31,23 @@ export function useScrollLock(locked: boolean) {
       document.body.style.paddingRight = `${bodyComputedPadding + scrollbarWidth}px`;
 
       return () => {
-        document.body.style.overflow = prevOverflow;
+        document.documentElement.style.overflow = prevHtmlOverflow;
+        document.body.style.position = prevBodyPosition;
+        document.body.style.top = prevBodyTop;
+        document.body.style.width = prevBodyWidth;
+        document.body.style.overscrollBehavior = prevOverscrollBehavior;
         document.body.style.paddingRight = prevPaddingRight;
+        window.scrollTo(0, scrollY);
       };
     }
 
     return () => {
-      document.body.style.overflow = prevOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+      document.body.style.overscrollBehavior = prevOverscrollBehavior;
+      window.scrollTo(0, scrollY);
     };
   }, [locked]);
 }

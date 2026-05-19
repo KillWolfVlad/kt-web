@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  touch-action: none;
 }
 
 .dialog {
@@ -19,6 +20,7 @@
   padding: var(--space-xl);
   position: relative;
   transition: transform var(--transition-normal);
+  overflow: hidden;
 }
 
 .dialog.swiping {
@@ -92,6 +94,7 @@
   flex: 1;
   overflow-y: auto;
   min-height: 0;
+  overscroll-behavior: contain;
 }
 
 .save-button {
