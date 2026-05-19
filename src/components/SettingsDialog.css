@@ -145,5 +145,6 @@
     height: 100dvh;
     border-radius: 0;
     padding: var(--space-lg);
+    touch-action: pan-y;
   }
 }
