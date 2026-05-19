@@ -96,7 +96,7 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
                 onClick={() => setName("")}
                 title="Очистить"
               >
-                ✕
+                ⌫
               </button>
             </div>
           </label>
@@ -121,7 +121,7 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
                 }}
                 title="Очистить"
               >
-                ✕
+                ⌫
               </button>
             </div>
           </label>
