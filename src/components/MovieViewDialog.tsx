@@ -35,19 +35,32 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
   }, [toast]);
 
   const copyToClipboard = useCallback(async (text: string) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    let success = false;
+    try {
+      success = document.execCommand("copy");
+    } catch {
+      /* execCommand недоступен */
+    } finally {
+      document.body.removeChild(textarea);
+    }
+
+    if (success) {
+      setToast({ message: "Magnet-ссылка скопирована", type: "success" });
+      return;
+    }
+
     try {
       await navigator.clipboard.writeText(text);
       setToast({ message: "Magnet-ссылка скопирована", type: "success" });
     } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setToast({ message: "Magnet-ссылка скопирована", type: "success" });
+      setToast({ message: "Не удалось скопировать ссылку", type: "error" });
     }
   }, []);
 

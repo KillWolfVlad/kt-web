@@ -12,7 +12,7 @@ status: done
   - Заголовок модального диалогового окна: `Movie.nameRU`
     - В правой части заголовка расположен крестик для закрытия модального диалогового окна
   - Тело модального диалогового окна:
-    - Ссылка на Кинопоиск (ссылка формируется по правилу `https://www.kinopoisk.ru/film/${encodeURIComponent(Movie.id)}`)
+    - Ссылка на Кинопоиск (ссылка формируется по правилу `https://www.kinopoisk.ru/film/${encodeURIComponent(Movie.filmID)}`)
     - `Movie.country`
     - `Movie.genre`
     - `[Movie.ratingAgeLimits]+`
@@ -24,6 +24,8 @@ status: done
       - `[Torrent.type] / [Torrent.date] / [Torrent.audio] / Seeders: [Torrent.seeders] / Leechers: [Torrent.leechers]` 💾 🔗 🏡
         - 💾 - кнопка которая позволяет скачать `Torrent.link`
         - 🔗 - кнопка которая позволяет скопировать `Torrent.magnet` в буфер обмена (**ВАЖНО**: данный функционал должен работать в Safari на iOS, iPadOS и MacOS)
+          - Приоритет: сначала `document.execCommand("copy")` (синхронно в контексте жеста), затем `navigator.clipboard.writeText` как fallback
+          - В случае неудачи копирования должно отобразиться красное toast уведомление с текстом ошибки
         - 🏡 - кнопка которая вызывает WebHook (см `specs/2026-05-18-3-settings-dialog`)
           - Во время вызова кнопка должна стать `disabled`, после окончания вызова кнопка должна перестать быть `disabled`
           - После успешного должно отобразиться успешное (зеленое) toast уведомление сверху по центру экрана
