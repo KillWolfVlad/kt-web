@@ -18,6 +18,11 @@
   flex-direction: column;
   padding: var(--space-xl);
   position: relative;
+  transition: transform var(--transition-normal);
+}
+
+.dialog.swiping {
+  transition: none;
 }
 
 .close-button {

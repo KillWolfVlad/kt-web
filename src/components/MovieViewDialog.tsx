@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Movie } from "../types";
 import { useScrollLock } from "../hooks/useScrollLock";
+import { useSwipeToClose } from "../hooks/useSwipeToClose";
 import "./SettingsDialog.css";
 import "./MovieViewDialog.css";
 
@@ -15,6 +16,9 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
   const [callingIndex, setCallingIndex] = useState<number | null>(null);
 
   useScrollLock(true);
+
+  const { swipeStyle, isSwipingActive, onTouchStart, onTouchMove, onTouchEnd } =
+    useSwipeToClose(onClose);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -72,7 +76,14 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
   return (
     <>
       <div className="overlay" onClick={onClose}>
-        <div className="dialog movie-view-dialog" onClick={(e) => e.stopPropagation()}>
+        <div
+          className={`dialog movie-view-dialog${isSwipingActive ? " swiping" : ""}`}
+          style={swipeStyle}
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <button className="close-button" type="button" onClick={onClose}>
             ✕
           </button>

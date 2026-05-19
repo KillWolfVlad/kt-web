@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Settings } from "../hooks/useSettings";
 import { useScrollLock } from "../hooks/useScrollLock";
+import { useSwipeToClose } from "../hooks/useSwipeToClose";
 import "./SettingsDialog.css";
 
 interface Props {
@@ -19,19 +20,16 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
 
   useScrollLock(true);
 
+  const { swipeStyle, isSwipingActive, onTouchStart, onTouchMove, onTouchEnd } =
+    useSwipeToClose(onClose, canSave);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && canSave) onClose();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
-
-  const handleOverlayClick = () => {
-    if (canSave) {
-      onClose();
-    }
-  };
+  }, [onClose, canSave]);
 
   const handleSave = () => {
     if (!canSave) return;
@@ -41,6 +39,10 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
     });
   };
 
+  const handleOverlayClick = () => {
+    if (canSave) onClose();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleSave();
@@ -48,7 +50,15 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
 
   return (
     <div className="overlay" onClick={handleOverlayClick}>
-      <form className="dialog" onClick={(e) => e.stopPropagation()} onSubmit={handleSubmit}>
+      <form
+        className={`dialog${isSwipingActive ? " swiping" : ""}`}
+        style={swipeStyle}
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSubmit}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <button
           className="close-button"
           type="button"

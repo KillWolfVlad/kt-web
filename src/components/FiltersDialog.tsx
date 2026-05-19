@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Filters } from "../hooks/useFilters";
 import { useScrollLock } from "../hooks/useScrollLock";
+import { useSwipeToClose } from "../hooks/useSwipeToClose";
 import "./SettingsDialog.css";
 import "./FiltersDialog.css";
 
@@ -20,6 +21,9 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
   );
 
   useScrollLock(true);
+
+  const { swipeStyle, isSwipingActive, onTouchStart, onTouchMove, onTouchEnd } =
+    useSwipeToClose(onClose);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -63,7 +67,15 @@ export function FiltersDialog({ initialFilters, onApply, onClose }: Props) {
 
   return (
     <div className="overlay" onClick={handleOverlayClick}>
-      <form className="dialog" onClick={(e) => e.stopPropagation()} onSubmit={handleSubmit}>
+      <form
+        className={`dialog${isSwipingActive ? " swiping" : ""}`}
+        style={swipeStyle}
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSubmit}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <button className="close-button" type="button" onClick={onClose}>
           ✕
         </button>
