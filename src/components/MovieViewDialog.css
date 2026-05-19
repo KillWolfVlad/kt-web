@@ -6,9 +6,11 @@
   gap: var(--space-sm);
 }
 
-.movie-view-dialog {
-  height: auto;
-  max-height: 80vh;
+@media (min-width: 768px) {
+  .movie-view-dialog {
+    height: auto;
+    max-height: 80vh;
+  }
 }
 
 .movie-view-content {
