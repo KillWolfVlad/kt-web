@@ -1,8 +1,6 @@
 # kt-web
 
-[![test](https://github.com/KillWolfVlad/kt-web/actions/workflows/test.yaml/badge.svg?branch=master)](https://github.com/KillWolfVlad/kt-web/actions/workflows/test.yaml)
 [![deploy](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yaml/badge.svg?branch=master)](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yaml)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Unofficial KinoTrend Web Version
 
@@ -14,8 +12,8 @@ If you have troubles with CORS use any CORS proxy, e.g. [CodeTabs](https://codet
 
 ## Requirements
 
-- Node.js v18 LTS or later
-- Yarn
+- Node.js v24 LTS or later
+- npm
 
 ## Maintainers
 
