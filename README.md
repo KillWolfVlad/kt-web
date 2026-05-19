@@ -1,6 +1,6 @@
 # kt-web
 
-[![deploy](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yaml/badge.svg?branch=master)](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yaml)
+[![Deploy to GitHub Pages](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/KillWolfVlad/kt-web/actions/workflows/deploy.yml)
 
 Unofficial KinoTrend Web Version
 
