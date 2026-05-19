@@ -8,28 +8,35 @@ interface Props {
   initialSettings: Settings;
   onSave: (settings: Settings) => void;
   onClose: () => void;
+  isRequired: boolean;
 }
 
-export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
+export function SettingsDialog({
+  initialSettings,
+  onSave,
+  onClose,
+  isRequired,
+}: Props) {
   const [dataSourceUrl, setDataSourceUrl] = useState(
     initialSettings.dataSourceUrl,
   );
   const [webhookUrl, setWebhookUrl] = useState(initialSettings.webhookUrl);
 
   const canSave = dataSourceUrl.trim().length > 0;
+  const canClose = !isRequired || canSave;
 
   useScrollLock(true);
 
   const { swipeStyle, isSwipingActive, onTouchStart, onTouchMove, onTouchEnd } =
-    useSwipeToClose(onClose, canSave);
+    useSwipeToClose(onClose, canClose);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && canSave) onClose();
+      if (e.key === "Escape" && canClose) onClose();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose, canSave]);
+  }, [onClose, canClose]);
 
   const handleSave = () => {
     if (!canSave) return;
@@ -40,7 +47,7 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
   };
 
   const handleOverlayClick = () => {
-    if (canSave) onClose();
+    if (canClose) onClose();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -62,8 +69,8 @@ export function SettingsDialog({ initialSettings, onSave, onClose }: Props) {
         <button
           className="close-button"
           type="button"
-          disabled={!canSave}
-          onClick={canSave ? onClose : undefined}
+          disabled={!canClose}
+          onClick={canClose ? onClose : undefined}
         >
           ✕
         </button>

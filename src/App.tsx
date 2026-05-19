@@ -77,6 +77,7 @@ function App() {
           initialSettings={settings}
           onSave={handleSave}
           onClose={() => setShowSettings(false)}
+          isRequired={isFirstVisit}
         />
       )}
       {showFilters && (
