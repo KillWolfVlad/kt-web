@@ -9,8 +9,7 @@ const countryFlagMap: Record<string, string> = {
   "Индия": "🇮🇳",
 };
 
-export function getCountryFlag(country: string): string | null {
-  const countries = country.split(",").map((c) => c.trim());
+export function getCountryFlag(countries: string[]): string | null {
   for (const c of countries) {
     if (c in countryFlagMap) {
       return countryFlagMap[c];

@@ -1,62 +1,102 @@
 import { useState } from "react";
+import type { ContentType } from "../types";
 
 const STORAGE_KEY = "kt-settings";
 const OLD_STORAGE_KEY = "moviesDataUrl";
-
-function migrateFromOldStorage() {
-  const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
-  if (oldRaw === null) return;
-
-  let oldValue: string;
-  try {
-    oldValue = JSON.parse(oldRaw);
-  } catch {
-    oldValue = oldRaw;
-  }
-
-  const current = localStorage.getItem(STORAGE_KEY);
-  if (current) {
-    try {
-      const parsed = JSON.parse(current);
-      if (parsed.dataSourceUrl) return;
-    } catch {
-      /* ignore */
-    }
-  }
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ dataSourceUrl: oldValue, webhookUrl: "" }),
-  );
-  localStorage.removeItem(OLD_STORAGE_KEY);
-}
+const SETTINGS_VERSION = 1;
 
 export interface Settings {
-  dataSourceUrl: string;
-  webhookUrl: string;
+  version: number;
+  moviesUrl: string | null;
+  seriesUrl: string | null;
+  webhookUrl: string | null;
+  contentType: ContentType;
 }
 
-export function useSettings() {
-  migrateFromOldStorage();
+const defaults: Settings = {
+  version: SETTINGS_VERSION,
+  moviesUrl: null,
+  seriesUrl: null,
+  webhookUrl: null,
+  contentType: "movies",
+};
 
-  const [settings, setSettings] = useState<Settings>(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        return JSON.parse(stored) as Settings;
+const migrations: Array<(s: Record<string, unknown>) => void> = [
+  (s) => {
+    const old = s.dataSourceUrl as string | undefined;
+    s.moviesUrl = old && old.trim() ? old : null;
+    delete s.dataSourceUrl;
+    s.seriesUrl = null;
+    s.webhookUrl = s.webhookUrl ?? null;
+    s.contentType = "movies";
+  },
+];
+
+function loadSettings(): Settings {
+  const exists = localStorage.getItem(STORAGE_KEY);
+  let raw: string | null = exists;
+
+  if (exists === null) {
+    const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
+    if (oldRaw !== null) {
+      let oldValue: string;
+      try {
+        oldValue = JSON.parse(oldRaw);
+      } catch {
+        oldValue = oldRaw;
       }
-    } catch {
-      /* ignore */
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ dataSourceUrl: oldValue, webhookUrl: "", version: 0 }),
+      );
+      localStorage.removeItem(OLD_STORAGE_KEY);
+      raw = localStorage.getItem(STORAGE_KEY);
     }
-    return { dataSourceUrl: "", webhookUrl: "" };
-  });
+  }
+
+  if (raw === null) {
+    return { ...defaults };
+  }
+
+  let settings: Record<string, unknown>;
+  try {
+    settings = JSON.parse(raw);
+  } catch {
+    return { ...defaults };
+  }
+
+  if (typeof settings.version !== "number") {
+    settings.version = 0;
+  }
+
+  let version = settings.version as number;
+  while (version < SETTINGS_VERSION) {
+    migrations[version](settings);
+    version++;
+  }
+  settings.version = version;
+
+  if (version !== (JSON.parse(raw).version ?? 0)) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+  }
+
+  return settings as unknown as Settings;
+}
+
+export function useSettings(): {
+  settings: Settings;
+  save: (s: Settings) => void;
+  isFirstVisit: boolean;
+} {
+  const [settings, setSettings] = useState<Settings>(loadSettings);
 
   const save = (newSettings: Settings) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newSettings));
-    setSettings(newSettings);
+    const toSave = { ...newSettings, version: SETTINGS_VERSION };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    setSettings(toSave);
   };
 
-  const isFirstVisit = localStorage.getItem(STORAGE_KEY) === null;
+  const isFirstVisit = settings.moviesUrl === null && settings.seriesUrl === null;
 
   return { settings, save, isFirstVisit };
 }

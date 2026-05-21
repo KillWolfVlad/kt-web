@@ -1,4 +1,4 @@
-# Схема данных data.json
+# Схема данных источника по фильмам
 
 ## Корневые поля
 
@@ -47,7 +47,7 @@
 |------|-----|----------------|----------|
 | `audio` | `string` | required | Язык аудиодорожки (D — дубляж, R — русский, L — английский и т.д.) |
 | `date` | `string` | required | Дата добавления торрента |
-| `dv` | `boolean` | optional | Наличие Dolby Vision |
+| `dv` | `boolean` | optional (отсутствует у некоторых торрентов) | Наличие Dolby Vision |
 | `leechers` | `number` | required | Количество личеров |
 | `license` | `boolean` | required | Лицензионная раздача |
 | `link` | `string` | required | Ссылка на скачивание торрент-файла |

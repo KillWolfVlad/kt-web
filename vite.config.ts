@@ -18,9 +18,9 @@ function webhookTestPlugin(): Plugin {
         res.end(JSON.stringify({ status: "error", message: "Not Found" }));
       });
 
-      server.middlewares.use("/test/data.json", async (_req, res) => {
+      server.middlewares.use("/test/movies.json", async (_req, res) => {
         const env = loadEnv(server.config.mode, server.config.root, "");
-        const targetUrl = env.KT_DATA_URL;
+        const targetUrl = env.KT_MOVIES_URL;
 
         if (!targetUrl) {
           res.statusCode = 500;
@@ -28,7 +28,54 @@ function webhookTestPlugin(): Plugin {
           res.end(
             JSON.stringify({
               status: "error",
-              message: "KT_DATA_URL is not set in .env",
+              message: "KT_MOVIES_URL is not set in .env",
+            }),
+          );
+          return;
+        }
+
+        try {
+          const response = await fetch(targetUrl);
+
+          if (!response.ok) {
+            res.statusCode = response.status;
+            res.setHeader("Content-Type", "application/json");
+            res.end(
+              JSON.stringify({
+                status: "error",
+                message: `Target server responded with ${response.status}`,
+              }),
+            );
+            return;
+          }
+
+          const data = await response.json();
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify(data));
+        } catch (error) {
+          res.statusCode = 502;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({
+              status: "error",
+              message: `Failed to fetch from target: ${error instanceof Error ? error.message : "Unknown error"}`,
+            }),
+          );
+        }
+      });
+
+      server.middlewares.use("/test/series.json", async (_req, res) => {
+        const env = loadEnv(server.config.mode, server.config.root, "");
+        const targetUrl = env.KT_SERIES_URL;
+
+        if (!targetUrl) {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({
+              status: "error",
+              message: "KT_SERIES_URL is not set in .env",
             }),
           );
           return;

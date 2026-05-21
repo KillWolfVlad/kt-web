@@ -1,29 +1,31 @@
 import { useState, useEffect } from "react";
-import type { Settings } from "../hooks/useSettings";
 import { useScrollLock } from "../hooks/useScrollLock";
 import { useSwipeToClose } from "../hooks/useSwipeToClose";
 import "./SettingsDialog.css";
 
 interface Props {
-  initialSettings: Settings;
-  onSave: (settings: Settings) => void;
+  moviesUrl: string | null;
+  seriesUrl: string | null;
+  webhookUrl: string | null;
+  onSave: (settings: { moviesUrl: string | null; seriesUrl: string | null; webhookUrl: string | null }) => void;
   onClose: () => void;
   isRequired: boolean;
 }
 
 export function SettingsDialog({
-  initialSettings,
+  moviesUrl,
+  seriesUrl,
+  webhookUrl,
   onSave,
   onClose,
   isRequired,
 }: Props) {
-  const [dataSourceUrl, setDataSourceUrl] = useState(
-    initialSettings.dataSourceUrl,
-  );
-  const [webhookUrl, setWebhookUrl] = useState(initialSettings.webhookUrl);
+  const [moviesUrlState, setMovieUrlState] = useState(moviesUrl ?? "");
+  const [seriesUrlState, setSeriesUrlState] = useState(seriesUrl ?? "");
+  const [webhookUrlState, setWebhookUrlState] = useState(webhookUrl ?? "");
 
-  const canSave = dataSourceUrl.trim().length > 0;
-  const canClose = !isRequired || canSave;
+  const canSave = moviesUrlState.trim().length > 0 || seriesUrlState.trim().length > 0;
+  const canClose = !isRequired;
 
   useScrollLock(true);
 
@@ -41,8 +43,9 @@ export function SettingsDialog({
   const handleSave = () => {
     if (!canSave) return;
     onSave({
-      dataSourceUrl: dataSourceUrl.trim(),
-      webhookUrl: webhookUrl.trim(),
+      moviesUrl: moviesUrlState.trim() || null,
+      seriesUrl: seriesUrlState.trim() || null,
+      webhookUrl: webhookUrlState.trim() || null,
     });
   };
 
@@ -77,20 +80,29 @@ export function SettingsDialog({
         <h2>Настройки</h2>
         <div className="dialog-scrollable">
           <label>
-            Источник данных (data.json)
+            URL фильмов
             <input
               type="text"
-              value={dataSourceUrl}
-              onChange={(e) => setDataSourceUrl(e.target.value)}
-              placeholder="https://example.com/data.json"
+              value={moviesUrlState}
+              onChange={(e) => setMovieUrlState(e.target.value)}
+              placeholder="https://example.com/movies.json"
             />
           </label>
           <label>
-            WebHook (опционально)
+            URL сериалов
             <input
               type="text"
-              value={webhookUrl}
-              onChange={(e) => setWebhookUrl(e.target.value)}
+              value={seriesUrlState}
+              onChange={(e) => setSeriesUrlState(e.target.value)}
+              placeholder="https://example.com/series.json"
+            />
+          </label>
+          <label>
+            Webhook URL (опционально)
+            <input
+              type="text"
+              value={webhookUrlState}
+              onChange={(e) => setWebhookUrlState(e.target.value)}
               placeholder="https://example.com/webhook"
             />
           </label>

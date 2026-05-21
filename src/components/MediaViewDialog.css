@@ -7,13 +7,13 @@
 }
 
 @media (min-width: 768px) {
-  .movie-view-dialog {
+  .media-view-dialog {
     height: auto;
     max-height: 80vh;
   }
 }
 
-.movie-view-content {
+.media-view-content {
   flex: 1;
   overflow-y: auto;
   min-height: 0;
@@ -21,19 +21,19 @@
   overscroll-behavior: contain;
 }
 
-.movie-view-field {
+.media-view-field {
   margin-bottom: var(--space-sm);
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--color-text);
 }
 
-.movie-view-field strong {
+.media-view-field strong {
   color: var(--color-text-secondary);
   font-weight: 600;
 }
 
-.movie-view-description {
+.media-view-description {
   max-height: 120px;
   overflow-y: auto;
   padding-right: var(--space-sm);

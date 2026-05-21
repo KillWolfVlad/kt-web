@@ -1,16 +1,27 @@
+import type { ContentType } from "../types";
 import "./Navbar.css";
 
-interface Props {
+interface NavbarProps {
+  contentType: ContentType;
+  onToggleContent: () => void;
+  hasActiveFilters: boolean;
   onOpenFilters: () => void;
   onOpenSettings: () => void;
-  hasActiveFilters: boolean;
 }
 
-export function Navbar({ onOpenFilters, onOpenSettings, hasActiveFilters }: Props) {
+export function Navbar({
+  contentType,
+  onToggleContent,
+  hasActiveFilters,
+  onOpenFilters,
+  onOpenSettings,
+}: NavbarProps) {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <span className="navbar-brand">KT Web</span>
+        <span className="navbar-brand" onClick={onToggleContent}>
+          {contentType === "movies" ? "KT Web" : "ST Web"}
+        </span>
       </div>
       <div className="navbar-right">
         <button className="navbar-button" onClick={onOpenFilters} title="Фильтры">

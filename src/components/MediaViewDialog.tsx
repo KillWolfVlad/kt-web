@@ -1,17 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
-import type { Movie } from "../types";
+import type { MediaItem } from "../types";
 import { useScrollLock } from "../hooks/useScrollLock";
 import { useSwipeToClose } from "../hooks/useSwipeToClose";
 import "./SettingsDialog.css";
-import "./MovieViewDialog.css";
+import "./MediaViewDialog.css";
 
 interface Props {
-  movie: Movie;
-  webhookUrl: string;
+  item: MediaItem;
+  webhookUrl: string | null;
   onClose: () => void;
 }
 
-export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
+export function MediaViewDialog({ item, webhookUrl, onClose }: Props) {
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [callingIndex, setCallingIndex] = useState<number | null>(null);
 
@@ -86,11 +86,13 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
     }
   }, [webhookUrl]);
 
+  const dateLabel = item.contentType === "movies" ? "Премьера" : "Период";
+
   return (
     <>
       <div className="overlay" onClick={onClose}>
         <div
-          className={`dialog movie-view-dialog${isSwipingActive ? " swiping" : ""}`}
+          className={`dialog media-view-dialog${isSwipingActive ? " swiping" : ""}`}
           style={swipeStyle}
           onClick={(e) => e.stopPropagation()}
           onTouchStart={onTouchStart}
@@ -100,55 +102,66 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
           <button className="close-button" type="button" onClick={onClose}>
             ✕
           </button>
-          <h2>{movie.nameRU}</h2>
-          <div className="movie-view-content">
-            <p className="movie-view-field">
+          <h2>{item.title}</h2>
+          <div className="media-view-content">
+            <p className="media-view-field">
               <a
-                href={`https://www.kinopoisk.ru/film/${encodeURIComponent(String(movie.filmID))}`}
+                href={`https://www.kinopoisk.ru/film/${encodeURIComponent(String(item.id))}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Кинопоиск
               </a>
             </p>
-            <p className="movie-view-field"><strong>Страна:</strong> {movie.country}</p>
-            <p className="movie-view-field"><strong>Жанр:</strong> {movie.genre}</p>
-            {movie.ratingAgeLimits && (
-              <p className="movie-view-field"><strong>Возрастной рейтинг:</strong> {movie.ratingAgeLimits}+</p>
+            <p className="media-view-field"><strong>Рейтинг:</strong> {item.rating}</p>
+            {item.ageRating && (
+              <p className="media-view-field"><strong>Возрастной рейтинг:</strong> {item.ageRating}+</p>
             )}
-            <p className="movie-view-field"><strong>Длительность:</strong> {movie.filmLength}</p>
-            {movie.directors && (
-              <p className="movie-view-field"><strong>Режиссеры:</strong> {movie.directors}</p>
+            <p className="media-view-field"><strong>{dateLabel}:</strong> {item.dateInfo}</p>
+            {item.filmLength && (
+              <p className="media-view-field"><strong>Длительность:</strong> {item.filmLength}</p>
             )}
-            {movie.actors && (
-              <p className="movie-view-field"><strong>Актеры:</strong> {movie.actors}</p>
+            {item.genres.length > 0 && (
+              <p className="media-view-field"><strong>Жанр:</strong> {item.genres.join(", ")}</p>
             )}
-            {movie.description && (
-              <p className="movie-view-field movie-view-description">
-                <strong>Описание:</strong> {movie.description}
+            {item.countries.length > 0 && (
+              <p className="media-view-field"><strong>Страна:</strong> {item.countries.join(", ")}</p>
+            )}
+            {item.directors && (
+              <p className="media-view-field"><strong>Режиссеры:</strong> {item.directors}</p>
+            )}
+            {item.actors && (
+              <p className="media-view-field"><strong>Актеры:</strong> {item.actors}</p>
+            )}
+            {item.description && (
+              <p className="media-view-field media-view-description">
+                <strong>Описание:</strong> {item.description}
               </p>
             )}
-            {movie.torrents.length > 0 && (
+            {item.torrents.length > 0 && (
               <div className="torrents-section">
                 <h3>Торренты</h3>
-                {movie.torrents.map((t, i) => (
+                {item.torrents.map((t, i) => (
                   <div key={i} className="torrent-row">
                     <span className="torrent-info">
-                      {t.type} / {t.date} / {t.audio} / Seeders: {t.seeders} / Leechers: {t.leechers}
+                      {t.prefix && <>{t.prefix} </>}
+                      {t.quality} / {t.date} / {t.audio} / ⬆{t.seeders} ⬇{t.leechers} / {t.size}
                     </span>
                     <div className="torrent-actions">
-                      <a
-                        href={t.link}
-                        className="torrent-btn"
-                        title="Скачать торрент"
-                        download
-                      >
-                        💾
-                      </a>
+                      {t.torrentLink && (
+                        <a
+                          href={t.torrentLink}
+                          className="torrent-btn"
+                          title="Скачать торрент"
+                          download
+                        >
+                          💾
+                        </a>
+                      )}
                       <button
                         className="torrent-btn"
                         title="Копировать magnet-ссылку"
-                        onClick={() => copyToClipboard(t.magnet)}
+                        onClick={() => copyToClipboard(t.magnetLink)}
                       >
                         🔗
                       </button>
@@ -157,7 +170,7 @@ export function MovieViewDialog({ movie, webhookUrl, onClose }: Props) {
                           className="torrent-btn"
                           title="Отправить на WebHook"
                           disabled={callingIndex === i}
-                          onClick={() => callWebhook(t.magnet, i)}
+                          onClick={() => callWebhook(t.magnetLink, i)}
                         >
                           🏡
                         </button>
