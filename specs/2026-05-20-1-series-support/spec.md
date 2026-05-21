@@ -309,11 +309,11 @@ interface MediaViewDialogProps {
 Строка торрента состоит из двух частей на одной строке:
 
 **Левая часть** — текст через слеш:
-`{prefix} {quality} / {date} / {audio} / ⬆{seeders} ⬇{leechers} / {size}`
+`{prefix} {quality} / {date} / {audio} / ↑{seeders} ↓{leechers} / {size}`
 
 - Если `torrent.prefix` не null — выводится перед quality через пробел (без слеша)
-- Пример (сериал): `[S1] WEB-DL 1080p / 2025-03-15 / Русский, Английский / ⬆45 ⬇12 / 4.20 GB`
-- Пример (фильм): `BDRip 1080p [DV] / 2025-03-15 / D / ⬆100 ⬇5 / 8.50 GB`
+- Пример (сериал): `[S1] WEB-DL 1080p / 2025-03-15 / Русский, Английский / ↑45 ↓12 / 4.20 GB`
+- Пример (фильм): `BDRip 1080p [DV] / 2025-03-15 / D / ↑100 ↓5 / 8.50 GB`
 
 **Правая часть** — кнопки:
 - 💾 — скачать .torrent (только если `torrent.torrentLink` не null)

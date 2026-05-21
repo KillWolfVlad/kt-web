@@ -145,7 +145,7 @@ export function MediaViewDialog({ item, webhookUrl, onClose }: Props) {
                   <div key={i} className="torrent-row">
                     <span className="torrent-info">
                       {t.prefix && <>{t.prefix} </>}
-                      {t.quality} / {t.date} / {t.audio} / ⬆{t.seeders} ⬇{t.leechers} / {t.size}
+                      {t.quality} / {t.date} / {t.audio} / ↑{t.seeders} ↓{t.leechers} / {t.size}
                     </span>
                     <div className="torrent-actions">
                       {t.torrentLink && (
