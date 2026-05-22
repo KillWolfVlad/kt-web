@@ -246,6 +246,7 @@ export function useSettings(): {
 interface NavbarProps {
   contentType: ContentType;
   onToggleContent: () => void;
+  hasMultipleSources: boolean;
   hasActiveFilters: boolean;
   onOpenFilters: () => void;
   onOpenSettings: () => void;
@@ -253,10 +254,24 @@ interface NavbarProps {
 ```
 
 Логика:
-- Если `contentType === 'movies'` → `<span className="navbar-brand">KT Web</span>`
-- Если `contentType === 'series'` → `<span className="navbar-brand">ST Web</span>`
-- `onClick` на `.navbar-brand` → `onToggleContent()`
-- `.navbar-brand` имеет `cursor: pointer`
+- Если задан только один источник (`hasMultipleSources === false`):
+  - Бренд отображается без точек
+- Если заданы оба источника (`hasMultipleSources === true`):
+  - Если `contentType === 'movies'` → `<span className="navbar-brand">KT Web</span>` с точками `● ○`
+  - Если `contentType === 'series'` → `<span className="navbar-brand">ST Web</span>` с точками `○ ●`
+  - `onClick` на `.navbar-brand` → `onToggleContent()`
+  - `title` на `.navbar-brand`: `"Переключиться на сериалы"` / `"Переключиться на фильмы"` (tooltip при наведении)
+  - Две точки-индикатора рядом с текстом (`<span className="navbar-brand-dots">`):
+    - `● ○` когда `contentType === "movies"` (левая точка активна)
+    - `○ ●` когда `contentType === "series"` (правая точка активна)
+    - Активная точка: `background: var(--color-primary)`, `opacity: 1`
+    - Неактивная точка: `background: var(--color-text-secondary)`, `opacity: 0.35`
+- `.navbar-brand` всегда имеет `cursor: pointer`
+- `onClick` на `.navbar-brand` всегда → `onToggleContent()`
+- `title` на `.navbar-brand`: `"Переключиться на сериалы"` / `"Переключиться на фильмы"` (tooltip при наведении)
+- Кнопка фильтров: 🔍, `title: "Открыть фильтры"`
+- Кнопка настроек: ⚙️, `title: "Открыть настройки"`
+- При `hover` на `.navbar-brand` неактивная точка подсвечивается (`opacity: 0.6`)
 
 ### 7. `src/components/MovieCard.tsx` → `src/components/MediaCard.tsx`
 
@@ -318,7 +333,7 @@ interface MediaViewDialogProps {
 **Правая часть** — кнопки:
 - 💾 — скачать .torrent (только если `torrent.torrentLink` не null)
 - 🔗 — копировать `torrent.magnetLink`
-- 🏡 — отправить webhook (только если `webhookUrl` не null)
+- 📡 — вызвать Webhook (только если `webhookUrl` не null), title: "Вызвать Webhook"
 
 Файл `MovieViewDialog.css` переименовать в `MediaViewDialog.css`.
 
@@ -389,7 +404,7 @@ KT_SERIES_URL=http://localhost:3000/series.json
 
 **Рендер:**
 - `<Navbar contentType={contentType} onToggleContent={() => save({ ...settings, contentType: contentType === 'movies' ? 'series' : 'movies' })} />`
-- По `loading` — спиннер (без изменений)
+- По `loading` — спиннер с эмодзи: 🎬 для `contentType === 'movies'`, 📺 для `contentType === 'series'`
 - По `error` — ошибка (без изменений)
 - `items.length === 0 && !loading && !error` — "Ничего не найдено" (без изменений)
 - `items.map(item => <MediaCard ... />)` — сетка

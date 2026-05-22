@@ -74,18 +74,20 @@ function App() {
   };
 
   const hasSource = moviesUrl !== null || seriesUrl !== null;
+  const hasMultipleSources = moviesUrl !== null && seriesUrl !== null;
 
   return (
     <>
       <Navbar
         contentType={contentType}
         onToggleContent={handleToggleContent}
+        hasMultipleSources={hasMultipleSources}
         onOpenFilters={() => setShowFilters(true)}
         onOpenSettings={() => setShowSettings(true)}
         hasActiveFilters={filters.name !== "" || filters.minRating !== null}
       />
       {hasSource && loading && (
-        <div className="spinner">🎬</div>
+        <div className="spinner">{contentType === "movies" ? "🎬" : "📺"}</div>
       )}
       {hasSource && error && (
         <div className="error-box">{error}</div>

@@ -168,11 +168,11 @@ export function MediaViewDialog({ item, webhookUrl, onClose }: Props) {
                       {webhookUrl && (
                         <button
                           className="torrent-btn"
-                          title="Отправить на WebHook"
+                          title="Вызвать Webhook"
                           disabled={callingIndex === i}
                           onClick={() => callWebhook(t.magnetLink, i)}
                         >
-                          🏡
+                          📡
                         </button>
                       )}
                     </div>

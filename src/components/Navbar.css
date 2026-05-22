@@ -62,4 +62,32 @@
   color: var(--color-primary);
   cursor: pointer;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar-brand-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 2px;
+}
+
+.navbar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-secondary);
+  opacity: 0.35;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar-dot-active {
+  background: var(--color-primary);
+  opacity: 1;
+}
+
+.navbar-brand:hover .navbar-dot:not(.navbar-dot-active) {
+  opacity: 0.6;
 }
