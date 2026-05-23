@@ -18,13 +18,11 @@
   color: var(--color-text-secondary);
   font-size: 14px;
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    opacity var(--transition-fast);
   flex-shrink: 0;
-}
-
-.clear-button:hover {
-  background: var(--color-bg-hover);
-  color: var(--color-text);
 }
 
 .dialog-actions {
@@ -45,12 +43,92 @@
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast),
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
     border-color var(--transition-fast);
 }
 
-.clear-all-button:hover {
-  background: var(--color-bg-hover);
+.rating-slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.rating-value {
+  width: 3em;
+  text-align: center;
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+  font-size: 0.875rem;
   color: var(--color-text);
-  border-color: var(--color-text-secondary);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.range-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.range-track {
+  position: relative;
+  height: 36px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.range-track-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: var(--color-border);
+  pointer-events: none;
+}
+
+.range-fill {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: var(--color-primary);
+  pointer-events: none;
+}
+
+.range-thumb {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-bg-elevated);
+  pointer-events: none;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.range-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.25);
+}
+
+@media (hover: hover) {
+  .clear-button:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+  }
+
+  .clear-all-button:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
+  }
 }

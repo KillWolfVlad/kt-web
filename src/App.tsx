@@ -39,10 +39,11 @@ function App() {
           return false;
         }
       }
-      if (filters.minRating !== null) {
-        if (item.rating < filters.minRating) {
-          return false;
-        }
+      if (filters.minRating !== null && item.rating < filters.minRating) {
+        return false;
+      }
+      if (filters.maxRating !== null && item.rating > filters.maxRating) {
+        return false;
       }
       return true;
     });
@@ -84,14 +85,16 @@ function App() {
         hasMultipleSources={hasMultipleSources}
         onOpenFilters={() => setShowFilters(true)}
         onOpenSettings={() => setShowSettings(true)}
-        hasActiveFilters={filters.name !== "" || filters.minRating !== null}
+        hasActiveFilters={
+          filters.name !== "" ||
+          filters.minRating !== null ||
+          filters.maxRating !== null
+        }
       />
       {hasSource && loading && (
         <div className="spinner">{contentType === "movies" ? "🎬" : "📺"}</div>
       )}
-      {hasSource && error && (
-        <div className="error-box">{error}</div>
-      )}
+      {hasSource && error && <div className="error-box">{error}</div>}
       {hasSource && !loading && !error && filteredItems.length > 0 && (
         <div className="movies-grid">
           {filteredItems.map((item) => (
@@ -99,9 +102,11 @@ function App() {
           ))}
         </div>
       )}
-      {hasSource && !loading && !error && filteredItems.length === 0 && items.length > 0 && (
-        <div className="error-box">Ничего не найдено</div>
-      )}
+      {hasSource &&
+        !loading &&
+        !error &&
+        filteredItems.length === 0 &&
+        items.length > 0 && <div className="error-box">Ничего не найдено</div>}
       {showSettings && (
         <SettingsDialog
           moviesUrl={moviesUrl}
